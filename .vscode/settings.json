@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "bindgen",
+    "onclick",
+    "yewlish"
+  ],
+  "rust-analyzer.diagnostics.disabled": [
+    "unresolved-import"
+  ]
+}
