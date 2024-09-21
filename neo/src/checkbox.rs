@@ -31,6 +31,53 @@ pub struct CheckboxProps {
     pub children: Children,
 }
 
+/// Checkboxes are used when several choices are available and multiple selections are allowed.
+///
+/// Examples:
+/// use yew::prelude::*;
+/// use neo::{attributify, checkbox::*, AttrPasser};
+///
+/// #[function_component(ExampleWithDefaultValue)]
+/// pub fn example_with_default_value() -> Html {
+///     html! {
+///        <Checkbox id="checkbox-1" default_checked={CheckedState::Checked}>
+///            {"Checkbox"}
+///        </Checkbox>
+///     }
+/// }
+///
+/// #[function_component(ExampleControllableState)]
+/// pub fn example_controllable_state() -> Html {
+///   let checked = use_state(|| CheckedState::Unchecked);
+///
+///   html! {
+///      <Checkbox checked={*checked} on_checked_change={Callback::from(move |checked| *checked = checked)}>
+///         {"Checkbox"}
+///     </Checkbox>
+///   }
+/// }
+///
+/// #[function_component(ExampleAriaLabelledBy)]
+/// pub fn example_aria_labelled_by() -> Html {
+///    html! {
+///       <>
+///         <AttrPasser name="checkbox" ..attributify! {
+///            "aria-labelledby" => "label-1"
+///         }>
+///           <Checkbox id="checkbox-1">
+///             {"Checkbox"}
+///           </Checkbox>
+///         </AttrPasser>
+///
+///         <label id="label-1">{"Label"}</label>
+///      </>
+///   }
+/// }
+///
+/// For more information, see:
+/// - TODO: add link to the storybook page
+/// - [Avaya Neo Design System](https://design.avayacloud.com/components/web/checkbox-web)
+/// - [WAI-ARIA Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)
 #[function_component(Checkbox)]
 pub fn checkbox(props: &CheckboxProps) -> Html {
     let checkbox_props = props! {
@@ -75,6 +122,7 @@ pub fn checkbox(props: &CheckboxProps) -> Html {
                     ref={props.r#ref}
                     id={props.id}
                     type="checkbox"
+                    role="checkbox"
                     class={props.class}
                     checked={props.checked == CheckedState::Checked}
                     required={props.required}
@@ -103,7 +151,7 @@ pub fn checkbox(props: &CheckboxProps) -> Html {
     html! {
         <>
             <PrimitiveCheckbox class={classes!("brix-neo-check", indeterminate_class, readonly_class, &props.class)} {render_as} ..checkbox_props />
-            { if props.children.is_empty() { html! {} } else { html! { <label for={&props.id}>{props.children.clone()}</label> } } }
+            <label for={&props.id}>{props.children.clone()}</label>
         </>
     }
 }
