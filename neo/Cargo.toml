@@ -22,7 +22,7 @@ checkbox = ["yewlish-checkbox", "yewlish-attr-passer"]
 icon = []
 
 [dependencies.yewlish-checkbox]
-version = "0.1.4"
+version = "0.1.5"
 optional = true
 
 [dependencies.yewlish-attr-passer]

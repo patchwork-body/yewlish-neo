@@ -2558,9 +2558,9 @@ dependencies = [
 
 [[package]]
 name = "yewlish-checkbox"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee6404eb9f6c185d6b11164abc1e3ab43fa35d167014fae20657f79acd681949"
+checksum = "20fb839416781e76aec517a0b34f4ab88427d0427297577b5bc56a9d68301e70"
 dependencies = [
  "log",
  "yew",
