@@ -51,9 +51,22 @@ pub fn checkbox(props: &CheckboxProps) -> Html {
     };
 
     let render_as = use_callback((), |props: CheckboxRenderAsProps, (): &()| {
-        let on_change = Callback::from({
+        let onchange = Callback::from({
             let toggle = props.toggle.clone();
-            move |_event: Event| toggle.emit(())
+
+            move |_event: Event| {
+                toggle.emit(());
+            }
+        });
+
+        let onclick = Callback::from({
+            let readonly = props.readonly;
+
+            move |event: MouseEvent| {
+                if readonly {
+                    event.prevent_default();
+                }
+            }
         });
 
         html! {
@@ -69,7 +82,8 @@ pub fn checkbox(props: &CheckboxProps) -> Html {
                     value={props.value}
                     readonly={props.readonly}
                     disabled={props.disabled}
-                    onchange={&on_change}
+                    onchange={&onchange}
+                    onclick={&onclick}
                 />
             </AttrReceiver>
         }
