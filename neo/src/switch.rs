@@ -41,6 +41,58 @@ pub struct SwitchProps {
     pub dir: Dir,
 }
 
+/// A `Switch` consists of a checkbox and some text as label. Thus it allows end-users to toggle between a true/false state.
+/// Switch label is passed in as children.  Label placement can be on either side of the checkbox.
+/// By default, the checkbox is placed to the left of the label.  To place label to the left of the checkbox,
+/// set dir to "rtl" on the parent of a Switch or on the Switch itself.
+///
+/// Examples:
+/// use yew::prelude::*;
+/// use neo::{enums::dir::Dir, switch::*};
+///
+/// #[function_component(ExampleDefault)]
+/// pub fn example_with_default_value() -> Html {
+///     html! {
+///       <Switch>{"Enable"}</Switch>
+///     }
+/// }
+///
+/// #[function_component(ExampleRtl)]
+/// pub fn example_rtl() -> Html {
+///   let checked = use_state(|| CheckedState::Unchecked);
+///
+///   html! {
+///      <Switch dir={Dir::Rtl}>{"Enable"}</Switch>
+///   }
+/// }
+///
+/// #[function_component(ExampleControllableState)]
+/// pub fn example_controllable_state() -> Html {
+///    html! {
+///       <>
+///           <Switch checked={*switch_state} onclick={{
+///               let switch_state = switch_state.clone();
+///
+///               Callback::from(move |_| {
+///                   switch_state.set(!*switch_state);
+///               })
+///             }}>
+///               {"Enable"}
+///           </Switch>
+///
+///           <button onclick={Callback::from(move |_| {
+///               switch_state.set(!*switch_state);
+///           })}>
+///               {"Toggle"}
+///           </button>
+///      </>
+///   }
+/// }
+///
+/// For more information, see:
+/// - TODO: add link to the storybook page
+/// - [Avaya Neo Design System](https://design.avayacloud.com/components/switch)
+/// - [WAI-ARIA Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/)
 #[function_component(Switch)]
 pub fn switch(props: &SwitchProps) -> Html {
     let switch_props = props! {
@@ -85,6 +137,7 @@ pub fn switch(props: &SwitchProps) -> Html {
                     ref={props.r#ref}
                     id={props.id}
                     type="checkbox"
+                    role="switch"
                     class={props.class}
                     checked={props.checked}
                     required={props.required}
