@@ -9,7 +9,7 @@ pub struct WrapperProps {
 #[function_component(Wrapper)]
 pub fn wrapper(props: &WrapperProps) -> Html {
     html! {
-        <div class="min-w-screen flex flex-col gap-y-10 p-20">
+        <div class="min-w-screen flex flex-col gap-y-10 p-20 brix-neo-dark">
             <h2 class="text-xl whitespace-nowrap text-neutral-200">{props.title.clone()}</h2>
 
             <div class="flex flex-wrap items-center gap-10">
@@ -49,7 +49,7 @@ pub fn section(props: &SectionProps) -> Html {
 
     html! {
         <section class={class}>
-            <h3 class="text-lg whitespace-nowrap">{props.title.clone()}</h3>
+            <h3 class="text-lg whitespace-nowrap text-inherit">{props.title.clone()}</h3>
             {props.children.clone()}
         </section>
     }

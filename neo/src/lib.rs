@@ -1,5 +1,4 @@
 #[cfg(feature = "checkbox")]
-pub use checkbox::*;
-
-#[cfg(feature = "checkbox")]
-mod checkbox;
+pub mod checkbox;
+#[cfg(feature = "icon")]
+pub mod icon;

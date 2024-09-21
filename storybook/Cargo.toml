@@ -19,7 +19,7 @@ log = "0.4.21"
 serde_json = "1.0.117"
 serde = "1.0.203"
 web-sys = {version = "0.3.69", features = ["Document", "HtmlElement", "Location"]}
-neo = { path = "../neo" }
+neo = { path = "../neo", features = ["checkbox"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen-futures = "0.4.42"
