@@ -1,5 +1,5 @@
 use super::common::*;
-use neo::checkbox::*;
+use neo::{attributify, checkbox::*, AttrPasser};
 use yew::prelude::*;
 
 #[function_component(CheckboxPage)]
@@ -39,12 +39,22 @@ pub fn checkbox_page() -> Html {
                 </button>
             </Section>
 
+            <Section title="Aria-labelledby">
+                <AttrPasser name="checkbox" ..attributify! {
+                    "aria-labelledby" => "label#1"
+                }>
+                    <Checkbox id="checkbox#4" />
+                </AttrPasser>
+
+                <label id="label#1" for="checkbox#4">{"Accept terms and conditions"}</label>
+            </Section>
+
             <Section title="ReadOnly">
-                <Checkbox id="checkbox#4" readonly={true}>{"Accept terms and conditions: "}</Checkbox>
+                <Checkbox id="checkbox#5" readonly={true}>{"Accept terms and conditions: "}</Checkbox>
             </Section>
 
             <Section title="Disabled">
-                <Checkbox id="checkbox#5" disabled={true}>{"Accept terms and conditions: "}</Checkbox>
+                <Checkbox id="checkbox#6" disabled={true}>{"Accept terms and conditions: "}</Checkbox>
             </Section>
         </Wrapper>
     }
