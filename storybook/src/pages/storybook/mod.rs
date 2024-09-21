@@ -1,10 +1,12 @@
 use checkbox::CheckboxPage;
+use switch::SwitchPage;
 use yew::prelude::*;
 
 use crate::Router;
 
 mod checkbox;
 mod common;
+mod switch;
 
 #[derive(Debug, Clone, PartialEq, Properties)]
 pub struct StorybookProps {}
@@ -15,6 +17,7 @@ pub fn storybook_page(_props: &StorybookProps) -> Html {
 
     match location.path.as_str() {
         "checkbox" | "/checkbox" => html! { <CheckboxPage /> },
+        "switch" | "/switch" => html! { <SwitchPage /> },
         _ => html! {{ "Not Found!" }},
     }
 }

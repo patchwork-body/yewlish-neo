@@ -69,6 +69,9 @@ pub fn app(props: &AppProps) -> Html {
                         <li>
                             <a href="/checkbox">{"Checkbox"}</a>
                         </li>
+                        <li>
+                            <a href="/switch">{"Switch"}</a>
+                        </li>
                     </nav>
                 </aside>
 
