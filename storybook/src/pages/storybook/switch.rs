@@ -1,5 +1,5 @@
 use super::common::*;
-use neo::switch::*;
+use neo::{enums::dir::Dir, switch::*};
 use yew::prelude::*;
 
 #[function_component(SwitchPage)]
@@ -10,6 +10,10 @@ pub fn switch_page() -> Html {
         <Wrapper title="Switch">
             <Section title="Default">
                 <Switch>{"Enable"}</Switch>
+            </Section>
+
+            <Section title="Rtl">
+                <Switch dir={Dir::Rtl}>{"Enable"}</Switch>
             </Section>
 
             <Section title="Controllable">
