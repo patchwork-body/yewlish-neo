@@ -35,7 +35,7 @@ pub fn form(props: &FormProps) -> Html {
     };
 
     html! {
-        <form class={classes!("brix-neo-form", &inline_class, &props.class)}>
+        <form class={classes!("brix-neo-form", inline_class, &props.class)}>
             {for props.children.iter()}
         </form>
     }

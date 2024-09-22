@@ -20,6 +20,7 @@ yewlish-testing-tools = "0.1.4"
 [features]
 checkbox = ["yewlish-checkbox", "yewlish-attr-passer"]
 switch = ["yewlish-switch", "yewlish-attr-passer", "yewlish-utils"]
+form = []
 icon = []
 
 [dependencies.yewlish-checkbox]
