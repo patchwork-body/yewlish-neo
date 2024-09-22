@@ -71,7 +71,7 @@ pub fn link(props: &LinkProps) -> Html {
         href.push('/');
     }
 
-    #[cfg(feature = "hash_based_routing")]
+    #[cfg(feature = "hash-based-routing")]
     {
         if props.href.starts_with('/') {
             href.push_str(&format!("#{}", &props.href));
@@ -80,7 +80,7 @@ pub fn link(props: &LinkProps) -> Html {
         }
     }
 
-    #[cfg(not(feature = "hash_based_routing"))]
+    #[cfg(not(feature = "hash-based-routing"))]
     {
         if props.href.starts_with('/') {
             href.push_str(&props.href[1..]);

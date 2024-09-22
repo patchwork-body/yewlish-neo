@@ -1,7 +1,7 @@
 use std::{collections::HashMap, rc::Rc};
 #[cfg(target_arch = "wasm32")]
 use web_sys::wasm_bindgen::UnwrapThrowExt;
-#[cfg(feature = "hash_based_routing")]
+#[cfg(feature = "hash-based-routing")]
 use web_sys::wasm_bindgen::{prelude::Closure, JsCast};
 use yew::prelude::*;
 
@@ -39,10 +39,10 @@ pub fn app(props: &AppProps) -> Html {
                 let window = web_sys::window().unwrap_throw();
 
                 let pathname = {
-                    #[cfg(feature = "hash_based_routing")]
+                    #[cfg(feature = "hash-based-routing")]
                     let pathname = window.location().hash().unwrap_throw();
 
-                    #[cfg(not(feature = "hash_based_routing"))]
+                    #[cfg(not(feature = "hash-based-routing"))]
                     let pathname = window.location().pathname().unwrap_throw();
 
                     pathname
@@ -51,7 +51,7 @@ pub fn app(props: &AppProps) -> Html {
                 pathname
             });
 
-            #[cfg(feature = "hash_based_routing")]
+            #[cfg(feature = "hash-based-routing")]
             use_effect_with((), {
                 let path = path.clone();
 
