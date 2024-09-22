@@ -55,8 +55,6 @@ pub fn section(props: &SectionProps) -> Html {
     }
 }
 
-static LINK_PREFIX: &str = env!("LINK_PREFIX");
-
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct LinkProps {
     pub href: String,
@@ -65,29 +63,27 @@ pub struct LinkProps {
 
 #[function_component(Link)]
 pub fn link(props: &LinkProps) -> Html {
-    let mut href = LINK_PREFIX.to_string();
+    let href = {
+        #[cfg(feature = "hash-based-routing")]
+        let href = {
+            if props.href.starts_with('/') {
+                format!("#{}", &props.href)
+            } else {
+                format!("#/{}", &props.href)
+            }
+        };
 
-    if !href.ends_with('/') {
-        href.push('/');
-    }
+        #[cfg(not(feature = "hash-based-routing"))]
+        let href = {
+            if props.href.starts_with('/') {
+                props.href[1..].to_string()
+            } else {
+                props.href.clone()
+            }
+        };
 
-    #[cfg(feature = "hash-based-routing")]
-    {
-        if props.href.starts_with('/') {
-            href.push_str(&format!("#{}", &props.href));
-        } else {
-            href.push_str(&format!("#/{}", &props.href));
-        }
-    }
-
-    #[cfg(not(feature = "hash-based-routing"))]
-    {
-        if props.href.starts_with('/') {
-            href.push_str(&props.href[1..]);
-        } else {
-            href.push_str(&props.href);
-        }
-    }
+        href
+    };
 
     html! {
         <a
