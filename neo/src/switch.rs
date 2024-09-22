@@ -47,6 +47,7 @@ pub struct SwitchProps {
 /// set dir to "rtl" on the parent of a Switch or on the Switch itself.
 ///
 /// Examples:
+/// ```
 /// use yew::prelude::*;
 /// use neo::{enums::dir::Dir, switch::*};
 ///
@@ -88,6 +89,7 @@ pub struct SwitchProps {
 ///      </>
 ///   }
 /// }
+/// ```
 ///
 /// For more information, see:
 /// - TODO: add link to the storybook page

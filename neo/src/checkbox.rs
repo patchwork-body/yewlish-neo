@@ -34,6 +34,7 @@ pub struct CheckboxProps {
 /// Checkboxes are used when several choices are available and multiple selections are allowed.
 ///
 /// Examples:
+/// ```
 /// use yew::prelude::*;
 /// use neo::{attributify, checkbox::*, AttrPasser};
 ///
@@ -73,6 +74,7 @@ pub struct CheckboxProps {
 ///      </>
 ///   }
 /// }
+/// ```
 ///
 /// For more information, see:
 /// - TODO: add link to the storybook page
