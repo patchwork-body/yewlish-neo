@@ -9,3 +9,6 @@ pub mod icon;
 
 #[cfg(feature = "switch")]
 pub mod switch;
+
+#[cfg(feature = "form")]
+pub mod form;
