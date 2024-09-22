@@ -65,11 +65,26 @@ pub struct LinkProps {
 
 #[function_component(Link)]
 pub fn link(props: &LinkProps) -> Html {
-    let href = if LINK_PREFIX.ends_with('/') {
-        format!("{}{}", LINK_PREFIX, props.href)
+    let mut href = LINK_PREFIX.to_string();
+
+    if !href.ends_with('/') {
+        href.push('/');
+    }
+
+    if cfg!(feature = "hash_based_routing") {
+        log::debug!("Hash based routing enabled");
+        href.push('#');
     } else {
-        format!("{}/{}", LINK_PREFIX, props.href)
-    };
+        log::debug!("Hash based routing not enabled");
+    }
+
+    if props.href.starts_with('/') {
+        href.push_str(&props.href[1..]);
+    } else {
+        href.push_str(&props.href);
+    }
+
+    log::info!("Link href: {}", href);
 
     html! {
         <a
