@@ -55,7 +55,7 @@ pub fn section(props: &SectionProps) -> Html {
     }
 }
 
-const LINK_PREFIX: &str = env!("LINK_PREFIX");
+static LINK_PREFIX: &str = env!("LINK_PREFIX");
 
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct LinkProps {
@@ -71,20 +71,23 @@ pub fn link(props: &LinkProps) -> Html {
         href.push('/');
     }
 
-    if cfg!(feature = "hash_based_routing") {
-        log::debug!("Hash based routing enabled");
-        href.push('#');
-    } else {
-        log::debug!("Hash based routing not enabled");
+    #[cfg(feature = "hash_based_routing")]
+    {
+        if props.href.starts_with('/') {
+            href.push_str(&format!("#{}", &props.href));
+        } else {
+            href.push_str(&format!("#/{}", &props.href));
+        }
     }
 
-    if props.href.starts_with('/') {
-        href.push_str(&props.href[1..]);
-    } else {
-        href.push_str(&props.href);
+    #[cfg(not(feature = "hash_based_routing"))]
+    {
+        if props.href.starts_with('/') {
+            href.push_str(&props.href[1..]);
+        } else {
+            href.push_str(&props.href);
+        }
     }
-
-    log::info!("Link href: {}", href);
 
     html! {
         <a

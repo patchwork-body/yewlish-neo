@@ -15,6 +15,8 @@ pub struct StorybookProps {}
 pub fn storybook_page(_props: &StorybookProps) -> Html {
     let location = use_context::<Router>().expect("Router Context not found!");
 
+    log::debug!("location: {:?}", location);
+
     match location.path.as_str() {
         "checkbox" | "/checkbox" | "#/checkbox" => html! { <CheckboxPage /> },
         "switch" | "/switch" | "#/switch" => html! { <SwitchPage /> },

@@ -1,7 +1,8 @@
 use std::{collections::HashMap, rc::Rc};
-
 #[cfg(target_arch = "wasm32")]
 use web_sys::wasm_bindgen::UnwrapThrowExt;
+#[cfg(feature = "hash_based_routing")]
+use web_sys::wasm_bindgen::{prelude::Closure, JsCast};
 use yew::prelude::*;
 
 mod pages;
@@ -22,26 +23,74 @@ pub struct AppProps {
 
 #[function_component(App)]
 pub fn app(props: &AppProps) -> Html {
-    let router = use_memo(
-        (props.path.clone(), props.query.clone()),
-        |(path, query)| {
-            #[cfg(not(target_arch = "wasm32"))]
-            {
-                Router {
-                    path: path.into(),
-                    query: query.clone(),
-                }
-            }
+    let router = {
+        #[cfg(not(target_arch = "wasm32"))]
+        let router = use_memo(
+            (props.path.clone(), props.query.clone()),
+            |(path, query)| Router {
+                path: path.into(),
+                query: query.clone(),
+            },
+        );
 
-            #[cfg(target_arch = "wasm32")]
-            {
+        #[cfg(target_arch = "wasm32")]
+        let router = {
+            let path = use_state(|| {
+                let window = web_sys::window().unwrap_throw();
+
+                let pathname = {
+                    #[cfg(feature = "hash_based_routing")]
+                    let pathname = window.location().hash().unwrap_throw();
+
+                    #[cfg(not(feature = "hash_based_routing"))]
+                    let pathname = window.location().pathname().unwrap_throw();
+
+                    pathname
+                };
+
+                pathname
+            });
+
+            #[cfg(feature = "hash_based_routing")]
+            use_effect_with((), {
+                let path = path.clone();
+
+                |()| {
+                    let window = web_sys::window().unwrap_throw();
+
+                    let closure = Closure::wrap(Box::new({
+                        let window = window.clone();
+
+                        move || {
+                            path.set(window.location().hash().unwrap_throw());
+                        }
+                    }) as Box<dyn Fn()>);
+
+                    window
+                        .add_event_listener_with_callback(
+                            "hashchange",
+                            closure.as_ref().unchecked_ref(),
+                        )
+                        .unwrap_throw();
+
+                    move || {
+                        window
+                            .remove_event_listener_with_callback(
+                                "hashchange",
+                                closure.as_ref().unchecked_ref(),
+                            )
+                            .unwrap_throw();
+                    }
+                }
+            });
+
+            use_memo(path.clone(), |path| {
                 let window = web_sys::window().unwrap_throw();
                 let location = window.location();
-                let pathname = location.pathname().unwrap_throw();
                 let search = location.search().unwrap_throw();
 
                 Router {
-                    path: pathname.into(),
+                    path: (**path).clone().into(),
                     query: Rc::new(
                         search
                             .trim_start_matches('?')
@@ -57,9 +106,11 @@ pub fn app(props: &AppProps) -> Html {
                             .collect(),
                     ),
                 }
-            }
-        },
-    );
+            })
+        };
+
+        router
+    };
 
     html! {
         <ContextProvider<Router> context={(*router).clone()}>
