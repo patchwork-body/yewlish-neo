@@ -54,3 +54,29 @@ pub fn section(props: &SectionProps) -> Html {
         </section>
     }
 }
+
+const LINK_PREFIX: &str = env!("LINK_PREFIX");
+
+#[derive(Clone, Debug, PartialEq, Properties)]
+pub struct LinkProps {
+    pub href: String,
+    pub children: Children,
+}
+
+#[function_component(Link)]
+pub fn link(props: &LinkProps) -> Html {
+    let href = if LINK_PREFIX.ends_with('/') {
+        format!("{}{}", LINK_PREFIX, props.href)
+    } else {
+        format!("{}/{}", LINK_PREFIX, props.href)
+    };
+
+    html! {
+        <a
+            class="text-blue-400 hover:text-blue-300"
+            href={href.clone()}
+        >
+            {props.children.clone()}
+        </a>
+    }
+}

@@ -6,7 +6,7 @@ use yew::prelude::*;
 
 mod pages;
 
-use pages::StorybookPage;
+use pages::{Link, StorybookPage};
 
 #[derive(Clone, Debug, PartialEq)]
 struct Router {
@@ -67,10 +67,11 @@ pub fn app(props: &AppProps) -> Html {
                 <aside>
                     <nav>
                         <li>
-                            <a href="/checkbox">{"Checkbox"}</a>
+                            <Link href="/checkbox">{"Checkbox"}</Link>
                         </li>
+
                         <li>
-                            <a href="/switch">{"Switch"}</a>
+                            <Link href="/switch">{"Switch"}</Link>
                         </li>
                     </nav>
                 </aside>

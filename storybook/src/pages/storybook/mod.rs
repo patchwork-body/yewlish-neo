@@ -5,7 +5,7 @@ use yew::prelude::*;
 use crate::Router;
 
 mod checkbox;
-mod common;
+pub mod common;
 mod switch;
 
 #[derive(Debug, Clone, PartialEq, Properties)]
