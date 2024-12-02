@@ -95,7 +95,7 @@ pub fn checkbox(props: &CheckboxProps) -> Html {
             name: props.name.clone(),
             value: props.value.clone(),
             readonly: props.readonly,
-            children: ChildrenWithProps::new(vec![]),
+            children: Children::new(vec![]),
         }
     };
 

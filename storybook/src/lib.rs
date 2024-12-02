@@ -1,8 +1,6 @@
 use std::{collections::HashMap, rc::Rc};
 #[cfg(target_arch = "wasm32")]
-use web_sys::wasm_bindgen::UnwrapThrowExt;
-#[cfg(feature = "hash-based-routing")]
-use web_sys::wasm_bindgen::{prelude::Closure, JsCast};
+use web_sys::wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
 use yew::prelude::*;
 
 mod pages;
@@ -51,7 +49,6 @@ pub fn app(props: &AppProps) -> Html {
                 pathname
             });
 
-            #[cfg(feature = "hash-based-routing")]
             use_effect_with((), {
                 let path = path.clone();
 
@@ -123,6 +120,10 @@ pub fn app(props: &AppProps) -> Html {
 
                         <li>
                             <Link href="/switch">{"Switch"}</Link>
+                        </li>
+
+                        <li>
+                            <Link href="/radio-group">{"Radio Group"}</Link>
                         </li>
                     </nav>
                 </aside>

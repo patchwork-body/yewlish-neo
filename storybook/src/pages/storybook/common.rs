@@ -6,11 +6,66 @@ pub struct WrapperProps {
     pub children: Children,
 }
 
+#[derive(Clone, Debug, PartialEq)]
+enum Theme {
+    Light,
+    Dark,
+}
+
+impl Theme {
+    fn toggle(&self) -> Self {
+        match self {
+            Theme::Light => Theme::Dark,
+            Theme::Dark => Theme::Light,
+        }
+    }
+}
+
+use std::fmt;
+
+impl fmt::Display for Theme {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Theme::Light => "brix-neo-light",
+            Theme::Dark => "brix-neo-dark",
+        };
+        write!(f, "{}", s)
+    }
+}
+
+impl ToHtml for Theme {
+    fn to_html(&self) -> Html {
+        match self {
+            Theme::Light => html! { "🌞" },
+            Theme::Dark => html! { "🌚" },
+        }
+    }
+}
+
 #[function_component(Wrapper)]
 pub fn wrapper(props: &WrapperProps) -> Html {
+    let theme = use_state(|| Theme::Dark);
+
+    let toggle_theme = use_callback(theme.clone(), {
+        |event: MouseEvent, theme| {
+            event.prevent_default();
+            theme.set(theme.toggle());
+        }
+    });
+
     html! {
-        <div class="min-w-screen flex flex-col gap-y-10 p-20 brix-neo-dark">
-            <h2 class="text-xl whitespace-nowrap text-neutral-200">{props.title.clone()}</h2>
+        <div class={classes!("min-w-screen", "flex", "flex-col", "gap-y-10", "p-20", (*theme).to_string())}>
+            <header class="flex justify-between items-center gap-x-2">
+                <h2 class="text-xl whitespace-nowrap text-neutral-200">{props.title.clone()}</h2>
+
+                <button class="flex justify-self-end align-center gap-x-2 border p-2 rounded-2 border-white" onclick={toggle_theme}>
+                    {"Toggle theme:"}
+
+                    <span>
+                        {&*theme}
+                    </span>
+                </button>
+            </header>
 
             <div class="flex flex-wrap items-center gap-10">
                 {props.children.clone()}

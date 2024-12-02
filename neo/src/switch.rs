@@ -3,7 +3,7 @@ use yew::prelude::*;
 use yew::props;
 use yewlish_attr_passer::AttrReceiver;
 use yewlish_switch::{Switch as PrimitiveSwitch, SwitchProps as PrimitiveSwitchProps, *};
-use yewlish_utils::enums::dir::Dir;
+use yewlish_utils::enums::Dir;
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct SwitchProps {

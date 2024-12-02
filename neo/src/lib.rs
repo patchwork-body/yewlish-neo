@@ -12,3 +12,6 @@ pub mod switch;
 
 #[cfg(feature = "form")]
 pub mod form;
+
+#[cfg(feature = "radio-group")]
+pub mod radio_group;

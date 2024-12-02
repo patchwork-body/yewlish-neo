@@ -1,5 +1,5 @@
 use super::common::*;
-use neo::{enums::dir::Dir, switch::*};
+use neo::{enums::Dir, switch::*};
 use yew::prelude::*;
 
 #[function_component(SwitchPage)]

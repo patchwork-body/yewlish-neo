@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use yewlish_utils::enums::dir::Dir;
+use yewlish_utils::enums::Dir;
 
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct InputWrapperProps {
