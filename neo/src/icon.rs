@@ -15,7 +15,7 @@ impl std::fmt::Display for IconSize {
             IconSize::Medium => "medium",
             IconSize::Large => "large",
         };
-        write!(f, "{}", size_str)
+        write!(f, "{size_str}")
     }
 }
 
@@ -49,7 +49,7 @@ impl std::fmt::Display for IconStatus {
             IconStatus::Inbound => "inbound",
             IconStatus::Outbound => "outbound",
         };
-        write!(f, "{}", size_str)
+        write!(f, "{size_str}")
     }
 }
 
@@ -63,13 +63,14 @@ impl std::fmt::Display for IconName {
         let icon_name_str = match self {
             IconName::Check => "check",
         };
-        write!(f, "{}", icon_name_str)
+        write!(f, "{icon_name_str}")
     }
 }
 
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct IconProps {
     pub name: IconName,
+    #[prop_or_default]
     pub aria_label: AttrValue,
     #[prop_or_default]
     pub class: Option<AttrValue>,
@@ -81,16 +82,17 @@ pub struct IconProps {
 
 #[function_component(Icon)]
 pub fn icon(props: &IconProps) -> Html {
-    if props.size == IconSize::Small && props.status.is_some() {
-        panic!("Status icons are not supported in small size.");
-    }
+    assert!(
+        !(props.size == IconSize::Small && props.status.is_some()),
+        "Status icons are not supported in small size."
+    );
 
     html! {
         <span
             role="img"
             class={classes!(
                 format!("brix-neo-icon-{}", props.name),
-                props.status.as_ref().map(|status| format!("brix-neo-icon-state brix-neo-icon-state--{}", status)),
+                props.status.as_ref().map(|status| format!("brix-neo-icon-state brix-neo-icon-state--{status}")),
                 props.status.as_ref().map(|_| if props.size == IconSize::Large { "brix-neo-icon-state--large".to_string() } else { format!("brix-neo-icon--{}", props.size) }),
                 &props.class,
             )}

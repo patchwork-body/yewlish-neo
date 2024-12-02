@@ -2,6 +2,7 @@ use yew::prelude::*;
 use yewlish_utils::enums::Dir;
 
 #[derive(Clone, Debug, PartialEq, Properties)]
+#[allow(clippy::struct_excessive_bools)]
 pub struct InputWrapperProps {
     #[prop_or_default]
     pub disabled: bool,

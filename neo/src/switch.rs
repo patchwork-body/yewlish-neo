@@ -6,6 +6,7 @@ use yewlish_switch::{Switch as PrimitiveSwitch, SwitchProps as PrimitiveSwitchPr
 use yewlish_utils::enums::Dir;
 
 #[derive(Clone, PartialEq, Properties)]
+#[allow(clippy::struct_excessive_bools)]
 pub struct SwitchProps {
     #[prop_or_default]
     pub r#ref: NodeRef,

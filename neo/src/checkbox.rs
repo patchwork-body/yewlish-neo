@@ -77,7 +77,7 @@ pub struct CheckboxProps {
 /// ```
 ///
 /// For more information, see:
-/// - TODO: add link to the storybook page
+/// - [Storybook - Checkbox](https://patchwork-body.github.io/yewlish-neo/#/checkbox)
 /// - [Avaya Neo Design System](https://design.avayacloud.com/components/web/checkbox-web)
 /// - [WAI-ARIA Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)
 #[function_component(Checkbox)]

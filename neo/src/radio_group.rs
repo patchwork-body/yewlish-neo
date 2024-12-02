@@ -9,6 +9,7 @@ use yewlish_radio_group::{
 use yewlish_utils::enums::{Dir, Orientation};
 
 #[derive(Clone, PartialEq, Properties)]
+#[allow(clippy::struct_excessive_bools)]
 pub struct RadioGroupProps {
     pub label: AttrValue,
     pub children: Children,

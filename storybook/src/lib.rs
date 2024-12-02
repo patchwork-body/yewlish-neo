@@ -125,6 +125,10 @@ pub fn app(props: &AppProps) -> Html {
                         <li>
                             <Link href="/radio-group">{"Radio Group"}</Link>
                         </li>
+
+                        <li>
+                            <Link href="/button">{"Button"}</Link>
+                        </li>
                     </nav>
                 </aside>
 

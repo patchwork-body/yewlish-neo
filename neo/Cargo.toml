@@ -21,6 +21,8 @@ yewlish-testing-tools = "^1"
 checkbox = ["yewlish-checkbox", "yewlish-attr-passer"]
 switch = ["yewlish-switch", "yewlish-attr-passer", "yewlish-utils"]
 radio-group = ["yewlish-radio-group", "yewlish-attr-passer"]
+spinner = ["yewlish-attr-passer"]
+button = ["yewlish-attr-passer", "spinner", "icon"]
 form = []
 icon = []
 

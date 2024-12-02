@@ -1,3 +1,4 @@
+use std::fmt;
 use yew::prelude::*;
 
 #[derive(Clone, Debug, PartialEq, Properties)]
@@ -21,15 +22,13 @@ impl Theme {
     }
 }
 
-use std::fmt;
-
 impl fmt::Display for Theme {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = match self {
+        let theme = match self {
             Theme::Light => "brix-neo-light",
             Theme::Dark => "brix-neo-dark",
         };
-        write!(f, "{}", s)
+        write!(f, "{theme}")
     }
 }
 

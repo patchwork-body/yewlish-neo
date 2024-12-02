@@ -1,3 +1,4 @@
+use button::ButtonPage;
 use checkbox::CheckboxPage;
 use radio_group::RadioGroupPage;
 use switch::SwitchPage;
@@ -5,6 +6,7 @@ use yew::prelude::*;
 
 use crate::Router;
 
+mod button;
 mod checkbox;
 pub mod common;
 mod radio_group;
@@ -21,6 +23,7 @@ pub fn storybook_page(_props: &StorybookProps) -> Html {
         "checkbox" | "/checkbox" | "#/checkbox" => html! { <CheckboxPage /> },
         "switch" | "/switch" | "#/switch" => html! { <SwitchPage /> },
         "radio-group" | "/radio-group" | "#/radio-group" => html! { <RadioGroupPage /> },
+        "button" | "/button" | "#/button" => html! { <ButtonPage /> },
         _ => html! {{ "Not Found!" }},
     }
 }

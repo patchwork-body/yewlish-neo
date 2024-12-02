@@ -31,8 +31,7 @@ pub fn checkbox_page() -> Html {
                 <button class="border border-2 p-2 rounded-sm" onclick={Callback::from(move |_| checkbox_state.set(
                     match *checkbox_state {
                         CheckedState::Checked => CheckedState::Unchecked,
-                        CheckedState::Unchecked => CheckedState::Checked,
-                        CheckedState::Indeterminate => CheckedState::Checked,
+                        CheckedState::Indeterminate | CheckedState::Unchecked => CheckedState::Checked,
                     }
                 ))}>
                     { "Toggle" }
