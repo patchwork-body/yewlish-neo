@@ -31,7 +31,7 @@ wasm-logger = "0.2.0"
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 rocket = "0.5.1"
 clap = { version = "4.5.4", features = ["derive"] }
-tokio = "1.38.0"
+tokio = "1.43.1"
 
 [features]
 default = []
